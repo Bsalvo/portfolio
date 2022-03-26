@@ -1,7 +1,8 @@
 import Mandalas from './mandalas.js'
 import TypeEffect from './typeEffect.js'
+import Form from './form.js'
 const timeout = ms => new Promise(resolve => setTimeout(resolve,ms))
-const mandala = new Mandalas('mandalas')
+//const mandala = new Mandalas('mandalas')
 setImageProfile()
 Skills.Preset.forEach(Skills.setSkill)
 const presentationList = [
@@ -16,14 +17,17 @@ const presentationList = [
 ]
 const presentation = new TypeEffect('presentation',presentationList)
 
-const btn_add_petala = document.getElementById("mandala_add_petela")
-const setPetalas = async () => {
-    for (let i = 0; i < 30; i++) {
-        await timeout(300)
-        btn_add_petala.click()
-    }
-}
-setPetalas()
+const sandboxForm = new Form({name:'sandbox',action:'google.com.br', el:'#sandboxForm'});
+
+
+// const btn_add_petala = document.getElementById("mandala_add_petela")
+// const setPetalas = async () => {
+//     for (let i = 0; i < 30; i++) {
+//         await timeout(300)
+//         btn_add_petala.click()
+//     }
+// }
+// setPetalas()
 
 
 
