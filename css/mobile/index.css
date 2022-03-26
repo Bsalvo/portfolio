@@ -1,5 +1,9 @@
-@media (min-width: 576px) { 
-    #menu{
+@media (max-width: 576px) { 
+    .panel{
+        flex-direction: column;
+    }
+
+    .menu{
         display: none;
     }
- }
+}

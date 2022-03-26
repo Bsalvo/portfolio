@@ -1,3 +1,10 @@
+
+.mandalas{
+    display: flex;
+    flex-direction: row;
+    gap: 2vmin;
+}
+
 .mandalas .controller{
     display: flex;
     flex-direction: column;
@@ -16,3 +23,117 @@
     background-color: #393939;
     transition: .5s;
 }
+
+.mandalas .view{
+    background-color: #1e1e1e2f;
+    width: 50vmin;
+    height: 50vmin;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mandalas .view .petala{
+    --rotate: 0;
+    --scale: 1;
+    --transition: .5s;
+    border: 1px solid #ffffff;
+    width: 70%;
+    height: 70%;
+    position: absolute;
+    /* transition: var(--transition); */
+    transform: scale(var(--scale)) rotate(var(--rotate));
+    animation: borderadius 5s infinite, rotatingOut 5s infinite, colorCrazyness 5s infinite;
+}
+
+@keyframes rotatingIn {
+    0%{
+        transform: rotate(var(--rotate));
+    }
+    100%{
+        transform: rotate(calc(var(--rotate) + 360));
+    }
+}
+@keyframes rotatingOut {
+    0%{
+        transform: scale(var(--scale)) rotate(var(--rotate));
+    }
+    100%{
+        transform: scale(var(--scale)) rotate(calc(var(--rotate) + 360));
+    }
+}
+@keyframes square {
+    0%{
+        transform: scale(var(--scale));
+    }
+    100%{
+        transform: scale(var(--scale));
+    }
+}
+@keyframes opacity {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+@keyframes borderadius {
+    0%{
+        border-radius: 0;
+    }
+    50%{
+        border-radius: 20em;
+    }
+    75%{
+        border-radius: 2em;
+    }
+    100%{
+        border-radius: 20em;
+    }
+}
+@keyframes colorCra {
+    0%{
+        border-color: rgb(56, 177, 157, .1);
+    }
+    100%{
+        border-color: rgb(56, 177, 157, 1);
+    }
+}
+@keyframes colorCrazyness {
+    0%{
+        border-color: rgb(56, 177, 157, .1);
+    }
+    10%{
+        border-color: rgba(172, 189, 24, 0.656);
+    }
+    20%{
+        border-color: rgba(195, 180, 136, 0.726);
+    }
+    30%{
+        border-color: rgba(40, 42, 185, 0.712);
+    }
+    40%{
+        border-color: rgba(64, 128, 69, 0.1);
+    }
+    50%{
+        border-color: rgba(101, 226, 205, 0.815);
+    }
+    60%{
+        border-color: rgba(170, 29, 195, 0.616);
+    }
+    70%{
+        border-color: rgba(255, 2, 213, 0.1);
+    }
+    80%{
+        border-color: #03DAC6;
+    }
+    90%{
+        border-color: rgba(172, 143, 199, 0.685);
+    }
+    100%{
+        border-color: rgb(56, 177, 157, 1);
+    }
+}
+

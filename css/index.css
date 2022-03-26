@@ -23,7 +23,7 @@ body{
 }
 .profile h3{
     font-weight: 100;
-    min-height: 24pt;
+    min-height: 30pt;
 }
 .text-lighter{
     color: #ffffff96;;
@@ -61,6 +61,8 @@ body{
 .panel{
     gap: 10px;
     display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
 }
 
 
