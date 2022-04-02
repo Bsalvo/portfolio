@@ -13,21 +13,21 @@ const presentationList = [
     'crud\'s e api\'s',
     'Entusiasta',
     'return name',
-    'Bruno Salvo',
+    'Bruno Salvo',   
 ]
 const presentation = new TypeEffect('presentation', presentationList)
 const inputs = [
-    { name: 'email', label: 'Email', type: 'email', placeholder: 'Qual seu email?', validation: { type: 'required' } },
-    { name: 'senha', label: 'Senha', type: 'password', placeholder: 'Qual sua senha?', validation: { type: 'required' } },
+    { name: 'email', label: 'Email', type: 'email', placeholder: 'Qual seu email?', validation: { type: 'required', message: 'Informe seu email' } },
+    { name: 'senha', label: 'Senha', type: 'password', placeholder: 'Qual sua senha?', validation: { type: 'required', message: 'Informe sua senha' } },
 ]
-const sandboxForm = new Form({ name: 'sandbox', action: 'google.com.br', parent: '#sandboxForm', inputs: inputs });
+const sandboxForm = new Form({ name: 'sandbox', action: 'google.com.br', inputs: inputs });
 window.teste = sandboxForm
 
 
 // const btn_add_petala = document.getElementById("mandala_add_petela")
 // const setPetalas = async () => {
 //     for (let i = 0; i < 30; i++) {
-//         await timeout(300)
+//         await ti meout(300)
 //         btn_add_petala.click()
 //     }
 // }

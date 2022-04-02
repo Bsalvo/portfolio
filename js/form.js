@@ -45,19 +45,23 @@ export default class Form {
     setInputs(value) {
         value.map(input => {
             input.parent = this.#formEl
-            let styling = {group:undefined,label:undefined,input:undefined}
-            styling.group = {...this.#style?.group,...input.style?.group}
-            styling.label = {...this.#style?.label,...input.style?.label}
-            styling.input = {...this.#style?.input,...input.style?.input}
+            let styling = { group: undefined, label: undefined, input: undefined }
+            styling.group = { ...this.#style?.group, ...input.style?.group }
+            styling.label = { ...this.#style?.label, ...input.style?.label }
+            styling.input = { ...this.#style?.input, ...input.style?.input }
             input.style = styling
             this.#inputs.push(new Input(input))
         })
     }
 
-    validate(){
+    validate() {
         this.#inputs.map(input => {
             input.validate
         })
+    }
+
+    kill(){
+        this.#formEl.remove()
     }
 
 }
@@ -83,6 +87,7 @@ class Input {
     #parent
     #inputEl
     #labelEl
+    #smallEl
     #labelText
     #type
     #rendered = false
@@ -103,9 +108,9 @@ class Input {
         let label = document.createElement('label')
         label.setAttribute('for', this.#name)
         label.textContent = this.#labelText
-        css(label,{...DEFAULT_INPUT_LABEL,...this.#style?.label})
+        css(label, { ...DEFAULT_INPUT_LABEL, ...this.#style?.label })
         this.#labelEl = label
-        
+
     }
 
     set input(value) {
@@ -113,24 +118,29 @@ class Input {
         let el = document.createElement('input')
         el.setAttribute('type', this.#type)
         el.setAttribute('name', this.#name)
-        css(el,{...DEFAULT_INPUT,...this.#style?.input})
+        css(el, { ...DEFAULT_INPUT, ...this.#style?.input })
+        el.addEventListener('change', e => {
+            this.#value = el.value
+        })
         this.#inputEl = el
+        let small = document.createElement('small')
+        this.#smallEl = small
     }
 
-    set placeholder(value){
-        if(!value) return
+    set placeholder(value) {
+        if (!value) return
         this.#placeholder = value
         this.#inputEl.placeholder = this.#placeholder
     }
 
-    set value(value){
-        if(!value) return
+    set value(value) {
+        if (!value) return
         this.#value = value
         this.#inputEl.value = this.#value
     }
 
-    set validation(value){
-        if(!value) return
+    set validation(value) {
+        if (!value) return
         this.#validation = new Validator(value)
     }
 
@@ -141,31 +151,34 @@ class Input {
         this.input = type ?? 'text'
         let div = document.createElement('div')
         css(div, { ...DEFAULT_INPUT_GROUP_STYLE, ...this.#style?.group })
-        div.append(this.#labelEl, this.#inputEl)
+        div.append(this.#labelEl, this.#inputEl, this.#smallEl)
         this.#parent.append(div)
         this.#rendered = true
     }
 
-    get validate(){
-        this.#validation.validate(this.#inputEl)
+    get validate() {
+        this.#validation.validate(this.#inputEl, this.#smallEl)
     }
+
 
 }
 
-class Validator{
+class Validator {
     #type
     #message
 
-    constructor(options){
+    constructor(options) {
         this.#type = options.type
         this.#message = options.message
     }
 
-    validate(input){
-        if(this.#type == 'required'){
-            if(input.value.length == 0){
+    validate(input, small) {
+        if (this.#type == 'required') {
+            if (input.value.length == 0) {
                 input.style.borderSize = '1px'
                 input.style.borderColor = '#B00020'
+                small.textContent = this.#message
+                small.style.color = '#B00020'
             }
         }
     }
@@ -178,5 +191,4 @@ const css = (el, style) => {
         el.style[value] = style[value]
     })
 }
-
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
